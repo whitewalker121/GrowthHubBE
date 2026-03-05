@@ -10,13 +10,16 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 2
       connection-timeout: 30000
-
+  main:
+    lazy-initialization: true
   jpa:
     hibernate:
-      ddl-auto: validate           # use 'create' first run, then 'validate'
+      ddl-auto: none           # use 'create' first run, then 'validate'
     show-sql: false
     properties:
       hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         default_schema: public
