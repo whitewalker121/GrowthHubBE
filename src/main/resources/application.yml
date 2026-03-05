@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: growthhub-salon-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate           # use 'create' first run, then 'validate'
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: public
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+app:
+  jwt:
+    secret: YBqMKqux1LICgHc6vluPtZGOT8OoP0cimrZTJDyjSazFpEKL5E9zz4YLU2X6AaVgtH7Y3DYHOItIt8IzbHLJXksVVBfxyU73YaaGFvSoUCD/LsCgMAE0FdG+IpkamAxtvD73Y0uWahVeXV4SQRfA8I2jstsGpfunBewEa9748ofYlPBu8qASDmxVbIUzC8WTjRm9kMCjFi/mp9CgYCsQP/BiqWREpKmsrWhbCA5bngB14UdKc++ipxZABNp30nYYsvijAQMFqYkehw5DunSEz1A10U8zrYzzfBPdeDkNbBIoJxJO+UdhYcIYofoHCxWXDCZKklZdyFfULPtgW8Ej4/+rllhe5J6T5avXYrDoHlWT5NqhDVsWf1xOqNpFCeOLqOT1pWqsM+dkozTXblozFssVtXI+wbY7JHUxUtR3AQabnmd0+eNrW5ZaN76vgrbuA6IDdPMaKeurbE7V7cRFxt91sETs/R9NJ3EPNa8+5vTt8VQzYATP1EGUrq7JVlcwi25VaDNEYGHjcYzmOWOCQkQ29gEZv4UUvT20HhXh+0nJ53KaBHvt9WQLgC7DFrp0mnHTrXjK6LVOGUDqV5GZ2uJ8pT1WMft4mVpYHKofgAe1owTJi0asQEO7cBmov2avUHVCFZlAIqMGlU/HAIb+UukCcqsLIGf3G1AtbavDHMuepO4qWPeEjErVYvvUnO08JqdU5O9a2K2eZ1NK3aShNbhiB5VxTdcszi3ZtvEcriS5Fr3x8k8ePwjwBJNpsKYiOca5Byhwbi9BEqLx/1z4LS2WFMv1BmP6djF0kt8Otjz8XGtafugC8vMyjAlgGIJJYUGMQvWnP3yLzdIaouyOFHnABM6Os/8f+nYm4356ZDQYkox1aTj3AI2Pwj1keNmaGhkaDYCih5Pc2Q3bQBgbVE9ZAHB4VZ37UwkFKfivxaTrtg2PGqMiHOuTEWFA7P/Fvsqby2OW8Kv3QdpOfZB3om0UHiULe3AZXslW/eb/8aYNg2hYHKk9g0ql/6yWNsm4UX/rQKbUH9fdXQkJCWxSodnJVlyVduxX/WpZkxaTfEU7K1kn9OYbhj8n3zRukvnyqPgfGQSpCvA8l6NPMUiZiCAOlMaPKVeWMEpl6hbKeIZ/tdhrscYLPMWgkl1XmVEAAmyfdv+C+QdDqOpQw7117s0uqfBOPZr67k3U628FcnBeMYbbatXxILFKOT9xR3DIoePBjNUqfmpKYtldEshm92mvdrfbwWXrP6l2FRqtgPW46AubCvx5xdriLwDR2gH9nNmn0D7cxFNaAcsu/mD7IHrcFiztoIL9tIwrly9qYGLHYje6OYLmgkdmErVoyh38pWC15TCHCA6YmwjNgKj/z9XjewMH7Ia7V8ueDElLcrQ=
+    expiration-ms: 86400000    # 24 hours
+    refresh-expiration-ms: 86400000
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+logging:
+  level:
+    com.growthhub.salon: INFO
+    org.hibernate.SQL: WARN
