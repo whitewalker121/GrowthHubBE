@@ -3,9 +3,9 @@ spring:
     name: growthhub-salon-api
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://@ep-lucky-flower-aiee9ki1-pooler.c-4.us-east-1.aws.neon.tech:5432/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_o6jOaskb8Kwh
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
