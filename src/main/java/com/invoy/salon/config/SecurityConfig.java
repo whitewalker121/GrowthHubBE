@@ -43,6 +43,10 @@ public class SecurityConfig {
                     "/v3/api-docs/**",
                     "/actuator/health"
                 ).permitAll()
+                .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN")
+.requestMatchers("/api/v1/reports/**").hasAnyRole("ADMIN")
+.requestMatchers("/api/v1/expenses/**").hasAnyRole("ADMIN", "MANAGER")
+.anyRequest().authenticated()                   
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
