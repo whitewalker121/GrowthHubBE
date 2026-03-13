@@ -2,7 +2,6 @@ package com.growthhub.salon.config;
 
 import com.growthhub.salon.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -23,8 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
-
     @Bean
     public JwtAuthFilter jwtAuthenticationFilter() {
         return new JwtAuthFilter();
@@ -43,10 +40,9 @@ public class SecurityConfig {
                     "/v3/api-docs/**",
                     "/actuator/health"
                 ).permitAll()
-                .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN")
-.requestMatchers("/api/v1/reports/**").hasAnyRole("ADMIN")
-.requestMatchers("/api/v1/expenses/**").hasAnyRole("ADMIN", "MANAGER")
-.anyRequest().authenticated()                   
+                .requestMatchers("/api/v1/dashboard/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/reports/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/expenses/**").hasAnyRole("ADMIN", "MANAGER")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
@@ -70,6 +66,7 @@ public class SecurityConfig {
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
         cfg.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", cfg);
         return source;
