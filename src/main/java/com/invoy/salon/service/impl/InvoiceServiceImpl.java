@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 @Service @RequiredArgsConstructor @Transactional
 public class InvoiceServiceImpl {
 
@@ -147,11 +148,12 @@ public class InvoiceServiceImpl {
     }
 
     private String generateInvoiceNumber() {
-        int year = LocalDate.now().getYear();
-        String prefix = "INV-" + year + "-";
-        int next = invoiceRepo.maxSequenceForPrefix(prefix).orElse(0) + 1;
-        return prefix + String.format("%04d", next);
-    }
+    int year = LocalDate.now().getYear();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddHHmmssSSS");
+    String timestamp = LocalDateTime.now().format(formatter);
+
+    return "BR-" + year + "-" + timestamp;
+}
 
     private String computeTier(BigDecimal totalSpend) {
         double spend = totalSpend.doubleValue();
