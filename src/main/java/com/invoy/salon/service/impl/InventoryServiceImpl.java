@@ -36,7 +36,7 @@ public class InventoryServiceImpl {
     public PageResponse<InventoryResponse> list(String category, String status, String search, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<InventoryItem> p;
-        if (category != null) {
+        if (category != null or category != '') {
             List<InventoryItem> filtered = invRepo.findByCategory(category);
             int start = (int) pageable.getOffset();
             int end = Math.min(start + size, filtered.size());
